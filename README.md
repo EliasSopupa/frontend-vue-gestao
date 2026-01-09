@@ -1,38 +1,134 @@
-# frontend
+<div>
 
-This template should help get you started developing with Vue 3 in Vite.
+<h1>Sistema de Gestão SOPUKA – Frontend (Vue.js)</h1>
 
-## Recommended IDE Setup
+<p>
+Interface web do <strong>Sistema de Gestão SOPUKA</strong>, desenvolvida em <strong>Vue.js 3</strong>,
+responsável por consumir a API REST construída em Django.
+</p>
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+<p>
+O frontend oferece uma experiência de utilizador moderna, responsiva e profissional,
+permitindo a gestão completa das entidades do sistema.
+</p>
 
-## Recommended Browser Setup
+<hr />
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+<h2>📌 Tema Escolhido</h2>
 
-## Customize configuration
+<p>
+Interface web para um sistema de gestão empresarial baseado em API REST.
+</p>
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+<hr />
 
-## Project Setup
+<h2>⚙️ Tecnologias Utilizadas</h2>
 
-```sh
+<ul>
+  <li>Vue.js 3 (Vite)</li>
+  <li>Vue Router</li>
+  <li>Axios</li>
+  <li>Bootstrap 5</li>
+  <li>HTML5 / CSS3</li>
+  <li>Git & GitHub</li>
+</ul>
+
+<hr />
+
+<h2>🎯 Funcionalidades Principais</h2>
+
+<ul>
+  <li>CRUD completo de Clientes</li>
+  <li>CRUD completo de Serviços</li>
+  <li>CRUD completo de Equipas</li>
+  <li>CRUD completo de Projetos</li>
+  <li>Dashboard de gestão</li>
+  <li>Notificações visuais (Toast)</li>
+  <li>Interface responsiva</li>
+</ul>
+
+<hr />
+
+<h2>🔗 Integração com Backend</h2>
+
+<p>
+O frontend comunica com o backend através de uma API REST desenvolvida em Django,
+utilizando Axios.
+</p>
+
+<p>
+Configuração localizada em:
+</p>
+
+<pre>
+src/services/api.js
+</pre>
+
+<p>Exemplo:</p>
+
+<pre>
+baseURL: "https://sua-api.fly.dev/api/"
+</pre>
+
+<hr />
+
+<h2>⚙️ Instruções de Instalação e Teste</h2>
+
+<h3>1️⃣ Clonar o repositório</h3>
+
+<pre>
+git clone https://github.com/SEU_USUARIO/frontend-vue-gestao.git
+cd frontend-vue-gestao
+</pre>
+
+<h3>2️⃣ Instalar dependências</h3>
+
+<pre>
 npm install
-```
+</pre>
 
-### Compile and Hot-Reload for Development
+<h3>3️⃣ Executar aplicação</h3>
 
-```sh
+<pre>
 npm run dev
-```
+</pre>
 
-### Compile and Minify for Production
+<p>
+A aplicação estará disponível em:
+</p>
 
-```sh
-npm run build
-```
+<pre>
+http://localhost:5173
+</pre>
+
+<hr />
+
+<h2>🧠 Conceitos Aplicados</h2>
+
+<ul>
+  <li>Componentização com Vue.js</li>
+  <li>Consumo de API REST</li>
+  <li>Gestão de estado local</li>
+  <li>Boas práticas de UX/UI</li>
+  <li>Separação frontend / backend</li>
+</ul>
+
+<hr />
+
+<h2>🎓 Objetivo Académico</h2>
+
+<p>
+Este frontend foi desenvolvido como parte de um projeto académico fullstack,
+com o objetivo de aplicar conhecimentos práticos de desenvolvimento web moderno.
+</p>
+
+<hr />
+
+<h2>👤 Autor</h2>
+
+<p>
+<strong>Elias Sopupa</strong><br />
+Projeto académico – Vue.js 3
+</p>
+
+</div>
