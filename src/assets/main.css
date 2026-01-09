@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+.dashboard {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-add {
+  background: #28a745;
+  color: white;
+}
+
+.btn-edit {
+  background: #ffc107;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+}
+
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-container {
+  position: fixed;
+  top: 150px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast-alert {
+  min-width: 260px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.15);
+  animation: slideIn .3s ease;
+}
