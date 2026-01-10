@@ -52,8 +52,7 @@ const save = async () => {
       showToast("Projeto criado");
     }
 
-    form.value = {};
-    editingId.value = null;
+    resetForm();
     loadAll();
   } catch {
     showToast("Erro ao guardar projeto", "danger");
@@ -61,7 +60,15 @@ const save = async () => {
 };
 
 const edit = (p) => {
-  form.value = { ...p };
+  form.value = {
+    cliente: p.cliente,
+    servicos: p.servicos || [],
+    equipas: p.equipas || [],
+    data_inicio: p.data_inicio,
+    data_fim: p.data_fim,
+    estado: p.estado,
+    local_execucao: p.local_execucao,
+  };
   editingId.value = p.id;
 };
 
@@ -73,51 +80,69 @@ const remove = async (id) => {
   }
 };
 
+const resetForm = () => {
+  form.value = {
+    cliente: "",
+    servicos: [],
+    equipas: [],
+    data_inicio: "",
+    data_fim: "",
+    estado: "",
+    local_execucao: "",
+  };
+  editingId.value = null;
+};
+
 onMounted(loadAll);
 </script>
-
 
 <template>
   <div class="container mt-4">
 
+    <!-- Toast -->
     <div class="toast-container" v-if="toastMessage">
       <Toast :message="toastMessage" :type="toastType" />
     </div>
 
-    <h3 class="mb-3">Gestão de Projetos</h3>
-
     
-      <h5 class="mb-3">
+      <h4 class="mb-3">
         {{ editingId ? "Editar Projeto" : "Novo Projeto" }}
-      </h5>
+      </h4>
 
-      <form class="row g-3" @submit.prevent="save">
-        <div class="col-md-6">
-          <select class="form-control" v-model="form.cliente">
-            <option value="">Cliente</option>
-            <option v-for="c in clientes" :key="c.id" :value="c.id">
-              {{ c.nome }}
-            </option>
-          </select>
-        </div>
+      <!-- FORM EM LISTA -->
+      <form @submit.prevent="save" class="d-flex flex-column gap-3">
 
-        <div class="col-md-6">
-          <input class="form-control" v-model="form.estado" placeholder="Estado" />
-        </div>
+        <select class="form-control" v-model="form.cliente">
+          <option value="">Selecione o Cliente</option>
+          <option v-for="c in clientes" :key="c.id" :value="c.id">
+            {{ c.nome }}
+          </option>
+        </select>
 
-        <div class="col-md-6">
-          <input type="date" class="form-control" v-model="form.data_inicio" />
-        </div>
+        <select class="form-control" v-model="form.servicos" multiple>
+          <option v-for="s in servicos" :key="s.id" :value="s.id">
+            {{ s.nome }}
+          </option>
+        </select>
 
-        <div class="col-md-6">
-          <input type="date" class="form-control" v-model="form.data_fim" />
-        </div>
+        <select class="form-control" v-model="form.equipas" multiple>
+          <option v-for="e in equipas" :key="e.id" :value="e.id">
+            {{ e.nome }}
+          </option>
+        </select>
 
-        <div class="col-12">
-          <input class="form-control" v-model="form.local_execucao" placeholder="Local de execução" />
-        </div>
+        <input type="date" class="form-control" v-model="form.data_inicio" />
+        <input type="date" class="form-control" v-model="form.data_fim" />
 
-        <div class="col-12 d-flex gap-2">
+        <input class="form-control" v-model="form.estado" placeholder="Estado" />
+
+        <input
+          class="form-control"
+          v-model="form.local_execucao"
+          placeholder="Local de execução"
+        />
+
+        <div class="d-flex gap-2">
           <button class="btn btn-primary">
             {{ editingId ? "Actualizar" : "Guardar" }}
           </button>
@@ -126,49 +151,75 @@ onMounted(loadAll);
             v-if="editingId"
             type="button"
             class="btn btn-secondary"
-            @click="editingId = null; form = {}"
+            @click="resetForm"
           >
             Cancelar
-
           </button>
         </div>
+
       </form>
     </div>
 
+    <!-- LISTA -->
     <div class="card">
+      <h4 class="mb-3">Lista de Projetos</h4>
 
-      <h5 class="mb-3">Lista de Projetos</h5>
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Cliente</th>
+            <th>Serviços</th>
+            <th>Equipas</th>
+            <th>Estado</th>
+            <th>Local</th>
+            <th style="width: 150px">Ações</th>
+          </tr>
+        </thead>
 
-      <div class="table-responsive">
-        <table class="table table-hover table-bordered align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>Cliente</th>
-              <th>Estado</th>
-              <th>Local</th>
-              <th style="width:150px">Ações</th>
-            </tr>
-          </thead>
+        <tbody>
+          <tr v-for="p in projetos" :key="p.id">
+            <td>{{ p.cliente_nome }}</td>
 
-          <tbody>
-            <tr v-for="p in projetos" :key="p.id">
-              <td>{{ p.cliente_nome }}</td>
-              <td>{{ p.estado }}</td>
-              <td>{{ p.local_execucao }}</td>
-              <td class="text-center">
-                <button class="btn btn-sm btn-warning me-1" @click="edit(p)">Editar</button>
-                <button class="btn btn-sm btn-danger" @click="remove(p.id)">Eliminar</button>
-              </td>
-            </tr>
+            <td>
+              <span
+                v-for="s in p.servicos_nomes"
+                :key="s"
+                class="badge bg-info me-1"
+              >
+                {{ s }}
+              </span>
+            </td>
 
-            <tr v-if="!projetos.length">
-              <td colspan="4" class="text-center text-muted">
-                Nenhum projeto registado
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <td>
+              <span
+                v-for="e in p.equipas_nomes"
+                :key="e"
+                class="badge bg-secondary me-1"
+              >
+                {{ e }}
+              </span>
+            </td>
+
+            <td>{{ p.estado }}</td>
+            <td>{{ p.local_execucao }}</td>
+
+            <td>
+              <button class="btn btn-sm btn-warning me-1" @click="edit(p)">
+                Editar
+              </button>
+              <button class="btn btn-sm btn-danger" @click="remove(p.id)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+
+          <tr v-if="!projetos.length">
+            <td colspan="6" class="text-center text-muted">
+              Nenhum projeto registado
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   
